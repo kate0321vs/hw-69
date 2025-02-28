@@ -5,7 +5,6 @@ export interface Show {
   premiered: string,
   status: string,
   id?: string,
-  language?: string,
 }
 
 export interface ShowApi {

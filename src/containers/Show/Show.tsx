@@ -33,26 +33,29 @@ const Show = () => {
       >
         <Grid container>
           <Grid item xs={3}>
-            <img
-              src={show.image.original}
-              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              alt={show.name}
-            />
+            {show.image !== null ?
+              <img
+                src={show.image.original}
+                style={{objectFit: 'cover', width: '100%', height: '100%'}}
+                alt={show.name}
+              /> : null
+            }
+
           </Grid>
 
           <Grid item xs={8}>
             <CardContent>
               <Typography mb={4} variant="h4" id="card-description">
-                {show.name}
+              {show.name}
               </Typography>
               <Typography variant="body2" color="textSecondary" sx={{ mb: 1 }}>
-                <strong>Premiered:</strong> {show.premiered}
+                <strong>Premiered:</strong> { show.premiered !== null ? show.premiered : '-'}
               </Typography>
-              <Typography variant="body2" color="textSecondary" sx={{ mb: 1 }}>
-                <strong>Status:</strong> {show.status}
+              <Typography variant="body2" color="textSecondary" sx={{mb: 1}}>
+                <strong>Status:</strong> {show.status !== null ? show.status : '-' }
               </Typography>
-              <Typography variant="body1" color="textSecondary" sx={{ mb: 1 }}>
-                {show.summary.replace(/<p>/g, '').replace(/<\/p>/g, '')}
+                <Typography variant="body1" color="textSecondary" sx={{mb: 1}}>
+                {show.summary !== null ? show.summary.replace(/<p>/g, '').replace(/<\/p>/g, '') : null}
               </Typography>
             </CardContent>
 

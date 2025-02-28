@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchOneShow, searchFetch } from './showsThun.ts';
 import { RootState } from '../app/store.ts';
 import { Show, ShowApi } from '../types';
@@ -37,7 +37,7 @@ const searchSlice = createSlice({
     builder.addCase(searchFetch.pending, (state) => {
       state.searchLoading = true;
     });
-    builder.addCase(searchFetch.fulfilled, (state, action) => {
+    builder.addCase(searchFetch.fulfilled, (state, action: PayloadAction<ShowApi[]>) => {
       state.searchLoading = false;
       state.response = action.payload;
     });
@@ -48,11 +48,12 @@ const searchSlice = createSlice({
     builder.addCase(fetchOneShow.pending, (state) => {
       state.oneShowLoading = true;
     });
-    builder.addCase(fetchOneShow.fulfilled, (state, action) => {
+    builder.addCase(fetchOneShow.fulfilled, (state, action: PayloadAction<Show>) => {
       state.oneShowLoading = false;
       state.oneShow = action.payload;
       state.response = [];
       state.showsName = (action.payload).name;
+      state.oneShow.image = state.oneShow.image ?? initialState.oneShow.image;
     });
     builder.addCase(fetchOneShow.rejected, (state) => {
       state.oneShowLoading = false;
