@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchOneShow, searchFetch } from './showsThun.ts';
 import { RootState } from '../app/store.ts';
-import { Show } from '../types';
+import { Show, ShowApi } from '../types';
 
 interface SearchState {
   showsName: string;
-  response: Show[];
+  response: ShowApi[];
   searchLoading: boolean;
   oneShow: Show;
+  oneShowLoading: boolean;
 }
 
 const initialState: SearchState = {
@@ -16,11 +17,12 @@ const initialState: SearchState = {
   searchLoading: false,
   oneShow: {
     name: '',
-    image: {original: ''},
+    image: {original: 'https://i.pinimg.com/474x/a0/a9/92/a0a9925db355875f31e85a9d4080da16.jpg'},
     summary: '',
     premiered: '',
     status: '',
   },
+  oneShowLoading: false,
 }
 
 const searchSlice = createSlice({
@@ -38,24 +40,22 @@ const searchSlice = createSlice({
     builder.addCase(searchFetch.fulfilled, (state, action) => {
       state.searchLoading = false;
       state.response = action.payload;
-      console.log(state.response)
     });
     builder.addCase(searchFetch.rejected, (state) => {
       state.searchLoading = false;
     });
 
     builder.addCase(fetchOneShow.pending, (state) => {
-      state.searchLoading = true;
+      state.oneShowLoading = true;
     });
     builder.addCase(fetchOneShow.fulfilled, (state, action) => {
-      state.searchLoading = false;
+      state.oneShowLoading = false;
       state.oneShow = action.payload;
       state.response = [];
       state.showsName = (action.payload).name;
-      console.log('action', action.payload);
     });
     builder.addCase(fetchOneShow.rejected, (state) => {
-      state.searchLoading = false;
+      state.oneShowLoading = false;
     })
   }
 })
@@ -63,5 +63,6 @@ const searchSlice = createSlice({
 export const { setQuery } = searchSlice.actions;
 export const searchShowName = (state: RootState) => state.search.showsName;
 export const showsArr = (state: RootState) => state.search.response;
+export const oneShowLoading = (state: RootState) => state.search.oneShowLoading;
 export const oneShow = (state: RootState) => state.search.oneShow;
 export const searchReducer = searchSlice.reducer;

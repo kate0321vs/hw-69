@@ -4,8 +4,10 @@ import axiosApi from '../axiosApi.ts';
 export const searchFetch  = createAsyncThunk (
   'search/searchFetch',
   async (showsName: string) => {
-    const response = await axiosApi(`search/shows?q=${showsName}`);
+    if (showsName) {
+      const response = await axiosApi(`search/shows?q=${showsName}`);
       return response.data;
+    }
   }
 )
 

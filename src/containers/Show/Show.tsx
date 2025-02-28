@@ -1,14 +1,16 @@
 import { useAppDispatch, useAppSelector } from '../../app/hook.ts';
-import { oneShow } from '../../store/searchSlice.ts';
+import { oneShow, oneShowLoading } from '../../store/searchSlice.ts';
 import { Card, CardContent, Container, Grid, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { fetchOneShow } from '../../store/showsThun.ts';
 import { useEffect } from 'react';
+import Loader from '../../components/UI/Loader/Loader.tsx';
 
 
 const Show = () => {
   const show = useAppSelector(oneShow);
   const dispatch = useAppDispatch();
+  const loading = useAppSelector(oneShowLoading)
   const {id} = useParams();
 
   useEffect(() => {
@@ -20,6 +22,7 @@ const Show = () => {
 
 
   return (
+    loading ? <Loader/> :
     <Container>
       <Card
         variant="outlined"

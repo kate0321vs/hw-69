@@ -4,4 +4,9 @@ export interface Show {
   summary: string,
   premiered: string,
   status: string,
+  id?: string
+}
+
+export interface ShowApi {
+  show: Show;
 }

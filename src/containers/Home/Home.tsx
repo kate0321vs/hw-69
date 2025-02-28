@@ -32,10 +32,18 @@ const Home = () => {
             variant="outlined"
             onChange={onChange}
             value={showsName}
-          ></TextField>
+          />
         </Grid>
       {shows.length > 0 && showList && (
-        <ul style={{ padding: 0, listStyle: 'none', marginTop: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
+        <ul style={{position: 'absolute',
+          top: '175px',
+          width: '95%',
+          backgroundColor: 'white',
+          padding: 0,
+          listStyle: 'none',
+          marginTop: '10px',
+          border: '1px solid #ccc',
+          borderRadius: '4px' }}>
           {shows.map((show) => (
             <li
               key={show.show.id}
