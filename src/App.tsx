@@ -18,8 +18,9 @@ const App = () => {
                 <Route
                     path="/shows"
                     element={(<Home />)}
-                />
-                <Route path='shows/:id' element={<Show />}/>
+                >
+                  <Route path='/shows/:id' element={<Show />}/>
+                </Route>
             </Routes>
         </Layout>
     );
