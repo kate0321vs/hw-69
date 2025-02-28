@@ -6,6 +6,7 @@ export const searchFetch  = createAsyncThunk (
   async (showsName: string) => {
     if (showsName) {
       const response = await axiosApi(`search/shows?q=${showsName}`);
+      console.log(response);
       return response.data;
     }
   }
